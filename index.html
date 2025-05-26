@@ -12,6 +12,26 @@
   <script src="https://unpkg.com/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide@4.1.3/dist/css/splide.min.css" />
 </head>
+
+  <script>
+  const valorMeta = 500;
+  const doacoes = [
+    { nome: "Jaque", valor: 30 },
+    { nome: "Jucy", valor: 20 }
+  ];
+
+  const valorTotal = doacoes.reduce((soma, doador) => soma + doador.valor, 0);
+  const percentual = Math.round((valorTotal / valorMeta) * 100);
+
+  const progressBar = document.getElementById("progressBar");
+  const doadoresSpan = document.getElementById("doadores");
+
+  progressBar.style.width = `${percentual}%`;
+  progressBar.textContent = `${percentual}%`;
+
+  doadoresSpan.textContent = doacoes.map(d => `${d.nome} (R$${d.valor})`).join(', ');
+</script>
+
 <body class="bg-gray-100 text-gray-900">
   <div class="w-full max-w-3xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-lg">
     <h1 class="text-3xl font-extrabold mb-6 text-center text-blue-800 drop-shadow">
@@ -25,6 +45,12 @@
 
 <!-- Barra de Progresso -->
 <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700 relative">
+  <div id="progressBar" class="bg-green-500 h-6 rounded-full text-white text-xs flex items-center justify-center transition-all duration-500 ease-in-out" style="width: 0%;">
+    0%
+  </div>
+</div>
+<p class="text-sm italic text-center mt-2">Contribuições: <span id="doadores"></span></p>
+
   <div class="bg-green-500 h-6 rounded-full text-white text-xs flex items-center justify-center" style="width: 10%;">
     10%
   </div>
